@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Amazon.Lambda.TestTool
 {
@@ -39,6 +40,12 @@ namespace Amazon.Lambda.TestTool
                 if (commandOptions.ShowHelp)
                 {
                     CommandLineOptions.PrintUsage();
+                    return;
+                }
+
+                if (commandOptions.ShowToolPath)
+                {
+                    Console.WriteLine(Assembly.GetEntryAssembly()!.Location);
                     return;
                 }
 

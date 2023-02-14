@@ -26,6 +26,8 @@ namespace Amazon.Lambda.TestTool
 
         public bool ShowHelp { get; set; }
 
+        public bool ShowToolPath { get; set; }
+
         public bool PauseExit { get; set; } = true;
 
         public static CommandLineOptions Parse(string[] args)
@@ -43,6 +45,14 @@ namespace Amazon.Lambda.TestTool
                         {
                             i++;
                         }
+                        break;
+                    case "--print-tool-path":
+                        options.ShowToolPath = GetNextBoolValue(i, out skipAhead);
+                        if (skipAhead)
+                        {
+                            i++;
+                        }
+
                         break;
                     case "--host":
                         options.Host = GetNextStringValue(i);
@@ -145,6 +155,8 @@ namespace Amazon.Lambda.TestTool
             Console.WriteLine("These options are valid for either mode the Lambda test tool is running in.");
             Console.WriteLine();
             Console.WriteLine("\t--path <directory>                    The path to the lambda project to execute. If not set then the current directory will be used.");
+            Console.WriteLine(
+                "\t--print-tool-path                                   Print tool location path for inserting in IDE.");
             Console.WriteLine();
 
             Console.WriteLine("These options are valid when using the web interface to select and execute the Lambda code.");
